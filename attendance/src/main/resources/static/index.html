@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <head>
+        <!--Offline Resources-->
+        <script src="lib/angular.min.js"></script>
+        <script src="lib/angularMaterial/angular-animate.min.js"></script>
+        <script src="lib/angularMaterial/angular-aria.min.js"></script>
+        <script src="lib/angularMaterial/angular-material.min.js"></script>
+        <script src="lib/angularMaterial/assets-cache.js"></script>
+        <link href="lib/angularMaterial/angular-material.css" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/stylesheet.css" rel="stylesheet">
+
+    </head>
+    <body ng-app="myApp" ng-controller="AppCtrl" layout="column" ng-cloak>
+        <div layout="row" flex>
+
+            <md-sidenav
+                layout="column"
+                class="md-sidenav-left md-whiteframe-10dp"
+                md-component-id="left"
+                md-is-locked-open="$mdMedia('gt-md')">
+
+                <md-toolbar class="md-padding" flex>
+                    <md-button ng-click="toggleSidenav" class="md-icon-button hide-gt-md"><md-icon>close</md-icon></md-button>
+                    <div id="logo_placeholder" class="centerH">
+                        <span class="md-title">LOGO</span>
+                    </div>
+
+                    <span class="md-headline centerH">{{teacher}}</span>
+
+                    <span flex></span>
+                </md-toolbar>
+                <md-content>
+                    <md-subheader md-no-sticky>My Classes</md-subheader>
+                    <md-divider></md-divider>
+                    <md-list>
+                        <md-list-item ng-repeat="class in teacherClasses" ng-click="selectClass($index)" ng-class="{'active':$index==activeClass}">Grade {{class.grade}} {{class.section}}{{class.subject}}</md-list-item>
+                    </md-list>
+                </md-content>
+            </md-sidenav>
+            <md-button class="md-fab md-fab-top-right" ng-click="toggleSidenav('left')" hide-gt-md>
+                <md-icon>menu</md-icon>
+            </md-button>
+            <md-content layout="row" layout-align="center start" flex class="md-hue-1 md-padding">
+                <md-content class="md-whiteframe-8dp" flex-gt-md="60" flex="100">
+
+                    <section>
+                        <md-subheader>{{grade}}{{section}}</md-subheader>
+                        <md-divider></md-divider>
+                        <md-list>
+                            <md-list-item
+                            ng-class="{'present': student.present}"
+                            ng-repeat="student in students"
+                            ng-click="togglePresent(student)"
+                            flex="50">
+                                <div class="md-list-item-text">
+                                    <p class="md-body-4">{{student.name}}</p>
+                                </div>
+                                <md-divider ng-if="!$last || student.present==true"></md-divider>
+                            </md-list-item>
+                        </md-list>
+                    </section>
+                </md-content>
+            </md-content>
+        </div>
+        <div id="listInfo" class="md-padding" layout="row">
+            <md-button ng-click="selectAll()" ng-disabled="selectDisabled" class="md-raised">
+                <md-icon>done_all</md-icon> Mark All
+            </md-button>
+            <md-button ng-click="submit()" class="md-raised md-primary">
+                <md-icon>send</md-icon> Submit
+            </md-button>
+            <span flex></span>
+            <p>{{presentStudents.length}}/{{students.length}} Students Present</p>
+        </div>
+
+    <script src="js/main.js"></script>
+    </body>
+</html>

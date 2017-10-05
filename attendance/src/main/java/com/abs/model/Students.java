@@ -1,11 +1,14 @@
 package com.abs.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,9 +28,12 @@ public class Students implements Serializable {
 	
 	@Column(name = "address")
 	private String address;
-	
+		
 	@ManyToOne
 	private Classes studentClass;
+	
+	@OneToMany(mappedBy = "student")
+	private Set<StudentAttendance> studentAttendances = new HashSet<>();
 
 	/**
 	 * @return the studentId
@@ -83,6 +89,20 @@ public class Students implements Serializable {
 	 */
 	public void setStudentClass(Classes studentClass) {
 		this.studentClass = studentClass;
+	}
+
+	/**
+	 * @return the studentAttendances
+	 */
+	public Set<StudentAttendance> getStudentAttendances() {
+		return studentAttendances;
+	}
+
+	/**
+	 * @param studentAttendances the studentAttendances to set
+	 */
+	public void setStudentAttendances(Set<StudentAttendance> studentAttendances) {
+		this.studentAttendances = studentAttendances;
 	}
 	
 	

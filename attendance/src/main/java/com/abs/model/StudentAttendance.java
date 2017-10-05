@@ -2,17 +2,11 @@ package com.abs.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,22 +16,23 @@ public class StudentAttendance implements Serializable {
 
 	private static final long serialVersionUID = -3262506268427221061L;
 
-	//`tbl_student_attendance`.`attendance_id`, `tbl_student_attendance`.`teacher_id`, `tbl_student_attendance`.`student_id`, `tbl_student_attendance`.`course_id`, `tbl_student_attendance`.`is_present`, `tbl_student_attendance`.`date`
 	
 	@Id
 	@Column(name = "attendance_id")
 	private Long attendanceId;
 	
-	@ManyToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-    @JoinTable(name="tbl_teachers",joinColumns=@JoinColumn(name="teacher_id",referencedColumnName="teacher_id"),inverseJoinColumns=@JoinColumn(name="teacher_id",referencedColumnName="teacher_id"))
-	private List<Teachers> teachers = new ArrayList<Teachers>(); 
-	
-	@ManyToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-    @JoinTable(name="tbl_courses",joinColumns=@JoinColumn(name="course_id",referencedColumnName="course_id"),inverseJoinColumns=@JoinColumn(name="course_id",referencedColumnName="course_id"))
-	private List<Courses> courses = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "teacher_id")
+	private Teachers teachers; 
 	
 	@ManyToOne
-	private Students student;
+	@JoinColumn(name = "course_id")
+	private Courses courses; 
+	
+	@ManyToOne
+	@JoinColumn(name = "student_id")
+	private Students student; 
+	
 	
 	@Column(name = "is_present")
 	private boolean isPresent;
@@ -59,47 +54,6 @@ public class StudentAttendance implements Serializable {
 		this.attendanceId = attendanceId;
 	}
 
-	/**
-	 * @return the teachers
-	 */
-	public List<Teachers> getTeachers() {
-		return teachers;
-	}
-
-	/**
-	 * @param teachers the teachers to set
-	 */
-	public void setTeachers(List<Teachers> teachers) {
-		this.teachers = teachers;
-	}
-
-	/**
-	 * @return the courses
-	 */
-	public List<Courses> getCourses() {
-		return courses;
-	}
-
-	/**
-	 * @param courses the courses to set
-	 */
-	public void setCourses(List<Courses> courses) {
-		this.courses = courses;
-	}
-
-	/**
-	 * @return the student
-	 */
-	public Students getStudent() {
-		return student;
-	}
-
-	/**
-	 * @param student the student to set
-	 */
-	public void setStudent(Students student) {
-		this.student = student;
-	}
 
 	/**
 	 * @return the isPresent
@@ -127,5 +81,47 @@ public class StudentAttendance implements Serializable {
 	 */
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	/**
+	 * @return the teachers
+	 */
+	public Teachers getTeachers() {
+		return teachers;
+	}
+
+	/**
+	 * @param teachers the teachers to set
+	 */
+	public void setTeachers(Teachers teachers) {
+		this.teachers = teachers;
+	}
+
+	/**
+	 * @return the courses
+	 */
+	public Courses getCourses() {
+		return courses;
+	}
+
+	/**
+	 * @param courses the courses to set
+	 */
+	public void setCourses(Courses courses) {
+		this.courses = courses;
+	}
+
+	/**
+	 * @return the student
+	 */
+	public Students getStudent() {
+		return student;
+	}
+
+	/**
+	 * @param student the student to set
+	 */
+	public void setStudent(Students student) {
+		this.student = student;
 	}
 }

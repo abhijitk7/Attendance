@@ -1,10 +1,13 @@
 package com.abs.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +27,9 @@ public class Teachers implements Serializable {
 	
 	@Column(name = "department")
 	private String department;
+	
+	@OneToMany(mappedBy = "teachers")
+	private Set<StudentAttendance> studentAttendances = new HashSet<>();
 
 	/**
 	 * @return the teacherId

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.abs.repository;
+package com.abs.attendance.repository;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 
-import com.abs.model.TeacherCourses;
+import com.abs.attendance.model.TeacherCourses;
 
 
 /**

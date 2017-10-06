@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.abs.controller;
+package com.abs.attendance.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abs.model.TeacherCourses;
-import com.abs.repository.TeacherCoursesRepository;
+import com.abs.attendance.model.TeacherCourses;
+import com.abs.attendance.repository.TeacherCoursesRepository;
 
 
 

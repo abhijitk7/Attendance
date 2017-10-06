@@ -1,4 +1,4 @@
-package com.abs.model;
+package com.abs.attendance.model;
 
 import java.io.Serializable;
 import java.util.HashSet;

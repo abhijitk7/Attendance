@@ -2,17 +2,10 @@ package com.abs.attendance.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,17 +20,7 @@ public class TeacherCourses implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@ManyToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-    @JoinTable(name="tbl_teachers",joinColumns=@JoinColumn(name="teacher_id",referencedColumnName="teacher_id"),inverseJoinColumns=@JoinColumn(name="teacher_id",referencedColumnName="teacher_id"))
-	private List<Teachers> teachers = new ArrayList<>();
-	
-	@ManyToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-    @JoinTable(name="tbl_courses",joinColumns=@JoinColumn(name="course_id",referencedColumnName="course_id"),inverseJoinColumns=@JoinColumn(name="course_id",referencedColumnName="course_id"))
-	private List<Courses> courses = new ArrayList<>();
-	
-	@ManyToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-    @JoinTable(name="tbl_classes",joinColumns=@JoinColumn(name="class_id",referencedColumnName="class_id"),inverseJoinColumns=@JoinColumn(name="class_id",referencedColumnName="class_id"))
-	private List<Classes> classes = new ArrayList<>();
+
 	
 	@Column(name = "assigned_date")
 	private Date assignedDate;
@@ -60,48 +43,6 @@ public class TeacherCourses implements Serializable {
 	 */
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the teachers
-	 */
-	public List<Teachers> getTeachers() {
-		return teachers;
-	}
-
-	/**
-	 * @param teachers the teachers to set
-	 */
-	public void setTeachers(List<Teachers> teachers) {
-		this.teachers = teachers;
-	}
-
-	/**
-	 * @return the courses
-	 */
-	public List<Courses> getCourses() {
-		return courses;
-	}
-
-	/**
-	 * @param courses the courses to set
-	 */
-	public void setCourses(List<Courses> courses) {
-		this.courses = courses;
-	}
-
-	/**
-	 * @return the classes
-	 */
-	public List<Classes> getClasses() {
-		return classes;
-	}
-
-	/**
-	 * @param classes the classes to set
-	 */
-	public void setClasses(List<Classes> classes) {
-		this.classes = classes;
 	}
 
 	/**

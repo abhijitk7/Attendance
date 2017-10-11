@@ -13,21 +13,22 @@ public class Classes implements Serializable {
 
 	private static final long serialVersionUID = -5870090218887119225L;
 
-	//`tbl_classes`.`class_id`, `tbl_classes`.`year`, `tbl_classes`.`semester`, `tbl_classes`.`section`, `tbl_classes`.`branch`
-	
+	// `tbl_classes`.`class_id`, `tbl_classes`.`year`, `tbl_classes`.`semester`,
+	// `tbl_classes`.`section`, `tbl_classes`.`branch`
+
 	@Id
 	@Column(name = "class_id")
 	private Long classId;
-	
+
 	@Column(name = "year")
 	private Long year;
-	
+
 	@Column(name = "semester")
 	private Long semester;
-	
+
 	@Column(name = "section")
 	private String section;
-	
+
 	@Column(name = "branch")
 	private String branch;
 
@@ -35,13 +36,14 @@ public class Classes implements Serializable {
 	 * @return the classId
 	 */
 	public Long getClassId() {
-		return classId;
+		return this.classId;
 	}
 
 	/**
-	 * @param classId the classId to set
+	 * @param classId
+	 *            the classId to set
 	 */
-	public void setClassId(Long classId) {
+	public void setClassId(final Long classId) {
 		this.classId = classId;
 	}
 
@@ -49,13 +51,14 @@ public class Classes implements Serializable {
 	 * @return the year
 	 */
 	public Long getYear() {
-		return year;
+		return this.year;
 	}
 
 	/**
-	 * @param year the year to set
+	 * @param year
+	 *            the year to set
 	 */
-	public void setYear(Long year) {
+	public void setYear(final Long year) {
 		this.year = year;
 	}
 
@@ -63,13 +66,14 @@ public class Classes implements Serializable {
 	 * @return the semester
 	 */
 	public Long getSemester() {
-		return semester;
+		return this.semester;
 	}
 
 	/**
-	 * @param semester the semester to set
+	 * @param semester
+	 *            the semester to set
 	 */
-	public void setSemester(Long semester) {
+	public void setSemester(final Long semester) {
 		this.semester = semester;
 	}
 
@@ -77,13 +81,14 @@ public class Classes implements Serializable {
 	 * @return the section
 	 */
 	public String getSection() {
-		return section;
+		return this.section;
 	}
 
 	/**
-	 * @param section the section to set
+	 * @param section
+	 *            the section to set
 	 */
-	public void setSection(String section) {
+	public void setSection(final String section) {
 		this.section = section;
 	}
 
@@ -91,16 +96,15 @@ public class Classes implements Serializable {
 	 * @return the branch
 	 */
 	public String getBranch() {
-		return branch;
+		return this.branch;
 	}
 
 	/**
-	 * @param branch the branch to set
+	 * @param branch
+	 *            the branch to set
 	 */
-	public void setBranch(String branch) {
+	public void setBranch(final String branch) {
 		this.branch = branch;
 	}
-	
-	
-	
+
 }

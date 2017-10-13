@@ -1,13 +1,10 @@
 package com.abs.attendance.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,32 +13,31 @@ public class Teachers implements Serializable {
 
 	private static final long serialVersionUID = -5675611736425246221L;
 
-	//`tbl_teachers`.`teacher_id`, `tbl_teachers`.`tearcher_name`, `tbl_teachers`.`department`
-	
+	// `tbl_teachers`.`teacher_id`, `tbl_teachers`.`tearcher_name`,
+	// `tbl_teachers`.`department`
+
 	@Id
 	@Column(name = "teacher_id")
 	private Long teacherId;
-	
+
 	@Column(name = "tearcher_name")
 	private String teacherName;
-	
+
 	@Column(name = "department")
 	private String department;
-	
-	@OneToMany(mappedBy = "teachers")
-	private Set<StudentAttendance> studentAttendances = new HashSet<>();
 
 	/**
 	 * @return the teacherId
 	 */
 	public Long getTeacherId() {
-		return teacherId;
+		return this.teacherId;
 	}
 
 	/**
-	 * @param teacherId the teacherId to set
+	 * @param teacherId
+	 *            the teacherId to set
 	 */
-	public void setTeacherId(Long teacherId) {
+	public void setTeacherId(final Long teacherId) {
 		this.teacherId = teacherId;
 	}
 
@@ -49,13 +45,14 @@ public class Teachers implements Serializable {
 	 * @return the teacherName
 	 */
 	public String getTeacherName() {
-		return teacherName;
+		return this.teacherName;
 	}
 
 	/**
-	 * @param teacherName the teacherName to set
+	 * @param teacherName
+	 *            the teacherName to set
 	 */
-	public void setTeacherName(String teacherName) {
+	public void setTeacherName(final String teacherName) {
 		this.teacherName = teacherName;
 	}
 
@@ -63,13 +60,14 @@ public class Teachers implements Serializable {
 	 * @return the department
 	 */
 	public String getDepartment() {
-		return department;
+		return this.department;
 	}
 
 	/**
-	 * @param department the department to set
+	 * @param department
+	 *            the department to set
 	 */
-	public void setDepartment(String department) {
+	public void setDepartment(final String department) {
 		this.department = department;
 	}
 }

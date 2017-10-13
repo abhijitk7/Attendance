@@ -13,9 +13,6 @@ public class Classes implements Serializable {
 
 	private static final long serialVersionUID = -5870090218887119225L;
 
-	// `tbl_classes`.`class_id`, `tbl_classes`.`year`, `tbl_classes`.`semester`,
-	// `tbl_classes`.`section`, `tbl_classes`.`branch`
-
 	@Id
 	@Column(name = "class_id")
 	private Long classId;
@@ -106,5 +103,4 @@ public class Classes implements Serializable {
 	public void setBranch(final String branch) {
 		this.branch = branch;
 	}
-
 }

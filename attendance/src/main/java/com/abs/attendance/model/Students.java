@@ -1,13 +1,13 @@
 package com.abs.attendance.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,12 +26,9 @@ public class Students implements Serializable {
 	@Column(name = "address")
 	private String address;
 
-	// @ManyToOne
-	// @JoinColumn(name = "class_id")
-	// private Classes studentClass;
-
-	@OneToMany(mappedBy = "student")
-	private Set<StudentAttendance> studentAttendances = new HashSet<>();
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "class_id", nullable = false)
+	private Classes classes;
 
 	/**
 	 * @return the studentId
@@ -79,18 +76,17 @@ public class Students implements Serializable {
 	}
 
 	/**
-	 * @return the studentAttendances
+	 * @return the classes
 	 */
-	public Set<StudentAttendance> getStudentAttendances() {
-		return this.studentAttendances;
+	public Classes getClasses() {
+		return this.classes;
 	}
 
 	/**
-	 * @param studentAttendances
-	 *            the studentAttendances to set
+	 * @param classes
+	 *            the classes to set
 	 */
-	public void setStudentAttendances(final Set<StudentAttendance> studentAttendances) {
-		this.studentAttendances = studentAttendances;
+	public void setClasses(final Classes classes) {
+		this.classes = classes;
 	}
-
 }

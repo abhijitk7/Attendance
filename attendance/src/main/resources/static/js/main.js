@@ -30,28 +30,22 @@ app.controller('AppCtrl', function($scope, $http, $mdToast, $mdSidenav){
         filePath = "appData/" + selectedClass+ ".json"
         return filePath;
     }
-
-    $http.get("appData/teacherData.json")
-      .success(function (data) {
-          console.log("data2 Received");
-          $scope.teacherClasses = data.classes;
-
-          //auto class selection
-          $http.get(getFilePath(0))
-            .success(function (data) {
-              $scope.students = data.students;
-              $scope.grade = data.grade;
-              $scope.section = data.section;
-              $scope.activeClass = 0;
-              console.log("data Received");
-              console.log($scope.students);
-              for(i=0; i<$scope.students.length; i++){
-                  if($scope.students[i].present==true){
-                      $scope.presentStudents.push(i);
-                  }
-              }
-          });
+    
+    $http.get("/staticData/teacher/1").success(function (data) {
+        console.log("Teacher data Received");
+        $scope.teacher=data;
+        
+        $http.post("/staticData/teacher/course", $scope.teacher)
+        .then(function(result){
+        	 console.log("Teacher Courses Received");
+             $scope.teachersInfo = result.data;
+             
+             console.log("Teacher Courses Received"+$scope.teachersInfo);
+        });
+        
     });
+    
+    
 
     $scope.togglePresent = function (student) {
 
@@ -92,7 +86,7 @@ app.controller('AppCtrl', function($scope, $http, $mdToast, $mdSidenav){
             });
     }
 
-    $scope.selectClass = function(index){
+   /* $scope.selectClass = function(index){
         $mdSidenav('left').toggle();
         $scope.activeClass = index;
         $http.get(getFilePath(index))
@@ -114,7 +108,7 @@ app.controller('AppCtrl', function($scope, $http, $mdToast, $mdSidenav){
                 $scope.selectDisabled = false;
             }
         });
-    }
+    }*/
 
     $scope.showActionToast = function(taskClicked) {
         console.log(taskClicked.completed);

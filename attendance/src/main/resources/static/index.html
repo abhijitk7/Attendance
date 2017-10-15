@@ -28,7 +28,7 @@
                         <span class="md-title">LOGO</span>
                     </div>
 
-                    <span class="md-headline centerH">{{teacher}}</span>
+                    <span class="md-headline centerH">{{teacher.teacherName}}</span>
 
                     <span flex></span>
                 </md-toolbar>
@@ -36,7 +36,9 @@
                     <md-subheader md-no-sticky>My Classes</md-subheader>
                     <md-divider></md-divider>
                     <md-list>
-                        <md-list-item ng-repeat="class in teacherClasses" ng-click="selectClass($index)" ng-class="{'active':$index==activeClass}">Grade {{class.grade}} {{class.section}}{{class.subject}}</md-list-item>
+                        <md-list-item ng-repeat="division in teachersInfo" ng-click="selectClass($index)" ng-class="{'active':$index==activeClass}">
+                        	{{division.classes.year}} - {{division.classes.section}} - {{division.course.courseName}}
+                        </md-list-item>
                     </md-list>
                 </md-content>
             </md-sidenav>

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tbl_students")
@@ -29,6 +30,9 @@ public class Students implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "class_id", nullable = false)
 	private Classes classes;
+
+	@Transient
+	private Boolean isSelected = false;
 
 	/**
 	 * @return the studentId
@@ -88,5 +92,20 @@ public class Students implements Serializable {
 	 */
 	public void setClasses(final Classes classes) {
 		this.classes = classes;
+	}
+
+	/**
+	 * @return the isSelected
+	 */
+	public Boolean getIsSelected() {
+		return this.isSelected;
+	}
+
+	/**
+	 * @param isSelected
+	 *            the isSelected to set
+	 */
+	public void setIsSelected(final Boolean isSelected) {
+		this.isSelected = isSelected;
 	}
 }

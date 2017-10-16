@@ -47,42 +47,44 @@ app.controller('AppCtrl', function($scope, $http, $mdToast, $mdSidenav){
     $scope.togglePresent = function (student) {
     	
     	var presentStudent={};
-    	
-    	presentStudent.teacher=$scope.teacher;
-    	presentStudent.course=$scope.activeCourse;
-    	presentStudent.student=student;
-    	presentStudent.isPresent=true;
-    	$scope.presentStudents.push(presentStudent);
-    	if($scope.students.length==$scope.presentStudents.length){
-            $scope.selectDisabled = true;
-        }
-    	console.log($scope.presentStudents);
 
-        /*if(student.present==false){
+        if(student.isSelected==false){
             console.log(this.$index);
-            $scope.presentStudents.push(this.$index);
-            console.log($scope.presentStudents);
+            presentStudent.teacher=$scope.teacher;
+        	presentStudent.course=$scope.activeCourse;
+        	presentStudent.student=student;
+        	presentStudent.isPresent=true;
+        	$scope.presentStudents.push(presentStudent);
             if($scope.students.length==$scope.presentStudents.length){
                 $scope.selectDisabled = true;
             }
         }
         else {
             console.log(this.$index);
-            var clickIndex = $scope.presentStudents.indexOf(this.$index);
-            $scope.presentStudents.splice(clickIndex, 1);
-            console.log($scope.presentStudents);
-            $scope.selectDisabled = false;
+            
+            $scope.presentStudents.filter(function(o){
+            	if(o.student.studentId === student.studentId){
+            		var clickIndex = $scope.presentStudents.indexOf(o);
+            		$scope.presentStudents.splice(clickIndex, 1);
+                    console.log($scope.presentStudents);
+                    $scope.selectDisabled = false;
+            	}
+            } );       
         }
-        student.present = ! student.present;*/
+        student.isSelected = ! student.isSelected;
     }
 
     $scope.selectAll = function(){
-        for(i=0; i<$scope.students.length; i++){
-            if($scope.presentStudents.indexOf(i)== -1){
-                $scope.students[i].present = true;
-                $scope.presentStudents.push(i);
-            }
-        }
+    	$scope.presentStudents = [];
+    	var presentStudent={};
+    	$scope.students.forEach(function(student){
+    		presentStudent.teacher=$scope.teacher;
+        	presentStudent.course=$scope.activeCourse;
+        	presentStudent.student=student;
+        	presentStudent.isPresent=true;
+        	student.isSelected=true;
+        	$scope.presentStudents.push(presentStudent);
+    	});
         $scope.selectDisabled = true;
         console.log($scope.selectDisabled);
     };

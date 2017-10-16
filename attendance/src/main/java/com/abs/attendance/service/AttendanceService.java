@@ -33,8 +33,8 @@ public class AttendanceService implements IAttendaceService {
 
 	@Override
 	public void saveAttendace(final List<StudentAttendance> attendance) {
-		// TODO Auto-generated method stub
-
+		// for (final StudentAttendance studAttendance : attendance) {
+		this.repo.save(attendance);
 	}
 
 	/*

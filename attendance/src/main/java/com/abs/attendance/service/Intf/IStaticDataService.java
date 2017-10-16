@@ -1,12 +1,12 @@
 /**
- * 
+ *
  */
 package com.abs.attendance.service.Intf;
 
 import java.util.List;
 
+import com.abs.attendance.model.Classes;
 import com.abs.attendance.model.Students;
-import com.abs.attendance.model.Teachers;
 
 /**
  * Interface class for Static Data Service.
@@ -15,14 +15,13 @@ import com.abs.attendance.model.Teachers;
 public interface IStaticDataService {
 
 	/**
-	 * @return
-	 * 		the List<Students>
+	 * @return the List<Students>
 	 */
 	List<Students> findAllStudents();
-	
+
 	/**
+	 * @param division
 	 * @return
-	 *  	the List<Teachers>
 	 */
-	List<Teachers> findAllTeachers();
+	List<Students> findAllStudentsInClass(Classes division);
 }

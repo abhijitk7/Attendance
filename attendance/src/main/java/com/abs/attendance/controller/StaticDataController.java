@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.abs.attendance.model.Classes;
 import com.abs.attendance.model.Students;
 import com.abs.attendance.model.TeacherCourses;
 import com.abs.attendance.model.Teachers;
@@ -39,6 +40,16 @@ public class StaticDataController {
 	}
 
 	/**
+	 * @param division
+	 * @return
+	 */
+	@PostMapping("/students")
+	public List<Students> getStudentsFromClass(@RequestBody final Classes division) {
+		return this.studService.findAllStudentsInClass(division);
+
+	}
+
+	/**
 	 * @return
 	 */
 	@GetMapping("/teacher/courses")
@@ -54,9 +65,12 @@ public class StaticDataController {
 		return this.teacherService.findTeacher(teacherId);
 	}
 
+	/**
+	 * @param teacher
+	 * @return
+	 */
 	@PostMapping("/teacher/course")
 	public List<TeacherCourses> getTeacherCourses(@RequestBody final Teachers teacher) {
 		return this.teacherService.findTeacherCourses(teacher);
 	}
-
 }

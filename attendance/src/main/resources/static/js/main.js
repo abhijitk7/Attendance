@@ -39,17 +39,26 @@ app.controller('AppCtrl', function($scope, $http, $mdToast, $mdSidenav){
         .then(function(result){
         	 console.log("Teacher Courses Received");
              $scope.teachersInfo = result.data;
-             
-             console.log("Teacher Courses Received"+$scope.teachersInfo);
         });
-        
     });
     
     
 
     $scope.togglePresent = function (student) {
+    	
+    	var presentStudent={};
+    	
+    	presentStudent.teacher=$scope.teacher;
+    	presentStudent.course=$scope.activeCourse;
+    	presentStudent.student=student;
+    	presentStudent.isPresent=true;
+    	$scope.presentStudents.push(presentStudent);
+    	if($scope.students.length==$scope.presentStudents.length){
+            $scope.selectDisabled = true;
+        }
+    	console.log($scope.presentStudents);
 
-        if(student.present==false){
+        /*if(student.present==false){
             console.log(this.$index);
             $scope.presentStudents.push(this.$index);
             console.log($scope.presentStudents);
@@ -64,7 +73,7 @@ app.controller('AppCtrl', function($scope, $http, $mdToast, $mdSidenav){
             console.log($scope.presentStudents);
             $scope.selectDisabled = false;
         }
-        student.present = ! student.present;
+        student.present = ! student.present;*/
     }
 
     $scope.selectAll = function(){
@@ -80,35 +89,22 @@ app.controller('AppCtrl', function($scope, $http, $mdToast, $mdSidenav){
 
     $scope.submit = function(){
         $scope.submitStatus = "query";
-        $http.post('URL', $scope.students)
+        $http.post('/attendance', $scope.presentStudents)
             .then(function(data){
                 $scope.submitStatus = "indeterminate"
             });
     }
 
-   /* $scope.selectClass = function(index){
+   $scope.selectClass = function(division){
         $mdSidenav('left').toggle();
-        $scope.activeClass = index;
-        $http.get(getFilePath(index))
-          .success(function (data) {
-            console.log("data2 Received");
-            $scope.students = data.students;
-            $scope.grade = data.grade;
-            $scope.section = data.section;
+        $scope.activeCourse = division.course;
+        $http.post("/staticData/students",division.classes)
+          .then(function (data) {
+            console.log("Students data received...");
+            $scope.students = data.data;
             $scope.presentStudents = [];
-            for(i=0; i<$scope.students.length; i++){
-                if($scope.students[i].present==true){
-                    $scope.presentStudents.push(i);
-                }
-            }
-            if($scope.students.length==$scope.presentStudents.length){
-                $scope.selectDisabled = true;
-            }
-            else {
-                $scope.selectDisabled = false;
-            }
         });
-    }*/
+    }
 
     $scope.showActionToast = function(taskClicked) {
         console.log(taskClicked.completed);

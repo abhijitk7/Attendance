@@ -1,13 +1,16 @@
 package com.abs.attendance.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,7 @@ public class StudentAttendance implements Serializable {
 
 	@Id
 	@Column(name = "attendance_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long attendanceId;
 
 	@OneToOne
@@ -33,10 +37,15 @@ public class StudentAttendance implements Serializable {
 	private Students student;
 
 	@Column(name = "is_present")
-	private boolean isPresent;
+	private Boolean isPresent;
 
 	@Column(name = "date")
 	private Date date;
+
+	@PrePersist
+	public void setLastUpdateDate() {
+		this.date = new Date();
+	}
 
 	/**
 	 * @return the attendanceId
@@ -51,21 +60,6 @@ public class StudentAttendance implements Serializable {
 	 */
 	public void setAttendanceId(final Long attendanceId) {
 		this.attendanceId = attendanceId;
-	}
-
-	/**
-	 * @return the isPresent
-	 */
-	public boolean isPresent() {
-		return this.isPresent;
-	}
-
-	/**
-	 * @param isPresent
-	 *            the isPresent to set
-	 */
-	public void setPresent(final boolean isPresent) {
-		this.isPresent = isPresent;
 	}
 
 	/**
@@ -126,5 +120,20 @@ public class StudentAttendance implements Serializable {
 	 */
 	public void setCourse(final Courses course) {
 		this.course = course;
+	}
+
+	/**
+	 * @return the isPresent
+	 */
+	public Boolean getIsPresent() {
+		return this.isPresent;
+	}
+
+	/**
+	 * @param isPresent
+	 *            the isPresent to set
+	 */
+	public void setIsPresent(final Boolean isPresent) {
+		this.isPresent = isPresent;
 	}
 }

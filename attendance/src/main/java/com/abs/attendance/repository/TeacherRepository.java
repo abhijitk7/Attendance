@@ -10,4 +10,11 @@ import com.abs.attendance.model.Teachers;
  */
 public interface TeacherRepository extends JpaRepository<Teachers, Long> {
 
+	/**
+	 * @param emailId
+	 * @param password
+	 * @return
+	 */
+	Teachers findByEmailIdAndPassword(String emailId, String password);
+
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.abs.attendance.model.TeacherCourses;
 import com.abs.attendance.model.Teachers;
+import com.abs.attendance.model.UserInfo;
 import com.abs.attendance.repository.TeacherCoursesRepository;
 import com.abs.attendance.repository.TeacherRepository;
 import com.abs.attendance.service.Intf.ITeacherService;
@@ -58,6 +59,17 @@ public class TeacherService implements ITeacherService {
 	@Override
 	public List<TeacherCourses> findTeacherCourses(final Teachers teacher) {
 		return this.teacherCoursesRepo.findByTeacher(teacher);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.abs.attendance.service.Intf.ITeacherService#validateTeacher(com.abs.
+	 * attendance.model.UserInfo)
+	 */
+	@Override
+	public Teachers validateTeacher(final UserInfo user) {
+		return this.teacherRepo.findByEmailIdAndPassword(user.getUserName(), user.getPassword());
 	}
 
 }

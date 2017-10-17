@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.abs.attendance.model.TeacherCourses;
 import com.abs.attendance.model.Teachers;
+import com.abs.attendance.model.UserInfo;
 
 /**
  * Interface class for Teachers.
@@ -27,5 +28,11 @@ public interface ITeacherService {
 	 * @return the List<TeacherCourses>
 	 */
 	List<TeacherCourses> findTeacherCourses(Teachers teacher);
+
+	/**
+	 * @param user
+	 * @return
+	 */
+	Teachers validateTeacher(UserInfo user);
 
 }

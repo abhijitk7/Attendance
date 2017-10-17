@@ -6,8 +6,8 @@
 
 	angular.module('myApp').controller('LoginController',LoginController);
 
-	LoginController.$inject = [ '$state', 'AuthenticationService','toaster'];
-	function LoginController($state,AuthenticationService,toaster) {
+	LoginController.$inject = [ '$state', 'AuthenticationService','toaster','$rootScope'];
+	function LoginController($state,AuthenticationService,toaster,$rootScope) {
 		
 		var vm = this;
 		
@@ -23,12 +23,13 @@
 			userData.userName=vm.username;
 			userData.password=vm.password;
 			
-			AuthenticationService.Login(userData, function(authenticationResult) {
+			AuthenticationService.Login(userData, function(authenticationResult,data) {
 
 				if(authenticationResult===401){
 					toaster.pop('error', "", "Username and/or password are invalid ! Verify your user name, and then type your password again.");
 				}else{
 					toaster.pop('Success', "", "User logged in successfully.");
+					$rootScope.teacher=data;
 		            $state.go('attendance');
 				}
 	            vm.dataLoading = false;

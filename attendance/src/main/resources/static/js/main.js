@@ -33,7 +33,7 @@ var app = angular.module('myApp', ['ngMaterial','ui.router','toaster'])
 	$location.path('/login');
 });
 
-app.controller('AtendanceCtrl', function($scope, $http){
+app.controller('AtendanceCtrl', function($scope, $http,$rootScope){
 
     console.log('controller initialized');
     $scope.submitStatus = "";
@@ -44,22 +44,14 @@ app.controller('AtendanceCtrl', function($scope, $http){
     };
 
     var selectedClass;
-    var filePath;
-    var getFilePath = function(index){
-        selectedClass = $scope.teacherClasses[index].classID;
-        filePath = "appData/" + selectedClass+ ".json"
-        return filePath;
-    }
     
-    $http.get("/staticData/teacher/1").success(function (data) {
-        console.log("Teacher data Received");
-        $scope.teacher=data;
-        
-        $http.post("/staticData/teacher/course", $scope.teacher)
-        .then(function(result){
-        	 console.log("Teacher Courses Received");
-             $scope.teachersInfo = result.data;
-        });
+    console.log("Teacher data Received");
+    $scope.teacher=$rootScope.teacher;
+    
+    $http.post("/staticData/teacher/course", $scope.teacher)
+    .then(function(result){
+    	 console.log("Teacher Courses Received");
+         $scope.teachersInfo = result.data;
     });
     
     

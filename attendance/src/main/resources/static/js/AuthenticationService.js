@@ -24,14 +24,12 @@
 			 * Ajax call to ivoke REST API
 			 * ----------------------------------------------
 			 */		
-			 $http.post('/teacher/authenticate', userData)
+			 $http.post('/authenticate', userData)
 	            .success(function (data, status, headers, config) {
-	            	$log.debug(status);
-					callback(status);
+					callback(status,data);
             })
             .error(function (data, status, header, config) {
-            	$log.debug(status);
-				callback(status);
+				callback(status,data);
             });
 
 		}

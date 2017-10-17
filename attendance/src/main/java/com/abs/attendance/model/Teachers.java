@@ -13,9 +13,6 @@ public class Teachers implements Serializable {
 
 	private static final long serialVersionUID = -5675611736425246221L;
 
-	// `tbl_teachers`.`teacher_id`, `tbl_teachers`.`tearcher_name`,
-	// `tbl_teachers`.`department`
-
 	@Id
 	@Column(name = "teacher_id")
 	private Long teacherId;
@@ -25,6 +22,12 @@ public class Teachers implements Serializable {
 
 	@Column(name = "department")
 	private String department;
+
+	@Column(name = "emailId")
+	private String emailId;
+
+	@Column(name = "password")
+	private String password;
 
 	/**
 	 * @return the teacherId
@@ -69,5 +72,35 @@ public class Teachers implements Serializable {
 	 */
 	public void setDepartment(final String department) {
 		this.department = department;
+	}
+
+	/**
+	 * @return the emailId
+	 */
+	public String getEmailId() {
+		return this.emailId;
+	}
+
+	/**
+	 * @param emailId
+	 *            the emailId to set
+	 */
+	public void setEmailId(final String emailId) {
+		this.emailId = emailId;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return this.password;
+	}
+
+	/**
+	 * @param password
+	 *            the password to set
+	 */
+	public void setPassword(final String password) {
+		this.password = password;
 	}
 }

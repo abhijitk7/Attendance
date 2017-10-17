@@ -1,6 +1,6 @@
 console.log("Running...");
-var app = angular.module('myApp', ['ngMaterial'])
- .config(function($mdThemingProvider) {
+var app = angular.module('myApp', ['ngMaterial','ui.router','toaster'])
+ .config(function($mdThemingProvider,$stateProvider) {
      $mdThemingProvider
         .theme('default')
         .primaryPalette('cyan',{
@@ -11,9 +11,29 @@ var app = angular.module('myApp', ['ngMaterial'])
             'hue-1':'800',
             'hue-2':'900',
         })
+        
+      //login page state
+	    $stateProvider.state('login', {
+	        url: '/login',
+	        templateUrl: 'views/login.html',
+	        controller: 'LoginController',
+	        controllerAs: 'vm',
+	        data: {
+	            pageTitle: 'Login'
+	        }
+	    }).state('attendance',{
+	    	url: '/attendance',
+	        controller : 'AtendanceCtrl',
+	    	templateUrl : 'views/attendance.html',
+	        data: {
+	            pageTitle: 'Attendance Management'
+	        }
+	    });
+}).run(function($location){
+	$location.path('/login');
 });
 
-app.controller('AppCtrl', function($scope, $http, $mdToast, $mdSidenav){
+app.controller('AtendanceCtrl', function($scope, $http){
 
     console.log('controller initialized');
     $scope.submitStatus = "";
@@ -107,28 +127,4 @@ app.controller('AppCtrl', function($scope, $http, $mdToast, $mdSidenav){
             $scope.presentStudents = [];
         });
     }
-
-    $scope.showActionToast = function(taskClicked) {
-        console.log(taskClicked.completed);
-        taskClicked.completed = !taskClicked.completed;
-        $scope.hideTask = true;
-        console.log(taskClicked.completed);
-        if(taskClicked.completed == false){
-            var taskStatus = "incomplete"
-        }
-        else{
-            var taskStatus = "completed"
-        }
-        var toast = $mdToast.simple()
-            .content("You marked "+taskClicked.name+" as "+taskStatus)
-            .action('Undo')
-            .highlightAction(false)
-            .hideDelay(10000)
-            .position("bottom right");
-        $mdToast.show(toast).then(function(response) {
-        if ( response == 'ok' ) {
-            taskClicked.completed = !taskClicked.completed;
-        }
-        });
-    };
 });

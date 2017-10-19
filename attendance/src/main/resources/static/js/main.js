@@ -33,7 +33,7 @@ var app = angular.module('myApp', ['ngMaterial','ui.router','toaster'])
 	$location.path('/login');
 });
 
-app.controller('AtendanceCtrl', function($scope, $http,$rootScope){
+app.controller('AtendanceCtrl', function($scope, $http,$rootScope,$mdSidenav,toaster){
 
     console.log('controller initialized');
     $scope.submitStatus = "";
@@ -105,7 +105,7 @@ app.controller('AtendanceCtrl', function($scope, $http,$rootScope){
         $scope.submitStatus = "query";
         $http.post('/attendance', $scope.presentStudents)
             .then(function(data){
-                $scope.submitStatus = "indeterminate"
+            	toaster.pop('Success', "", "Attendance marked successfully.");
             });
     }
 
